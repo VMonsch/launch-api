@@ -14,10 +14,14 @@ export default function handler(incomingRequest, outgoingResponse) {
         }
     }
 
+    console.log("oh hey")
+
     const requestedContentType = incomingRequest.query.path;
     const requestGetAllEntries = `https://${CS_CDN}/content_types/${requestedContentType}/entries?environment=${CS_ENVIRONMENT}`;
 
-    https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
-        outgoingResponse.status(getAllResponse.statusCode).send(getAllResponse);
-    });
+    // https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
+    //     outgoingResponse.status(getAllResponse.statusCode).send(getAllResponse);
+    // });
+
+    outgoingResponse.status(200).send(requestedContentType);
 }
