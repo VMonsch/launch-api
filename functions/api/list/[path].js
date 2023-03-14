@@ -18,6 +18,6 @@ export default function handler(incomingRequest, outgoingResponse) {
     const requestGetAllEntries = `https://${CS_CDN}/content_types/${requestedContentType}/entries?environment=${CS_ENVIRONMENT}`;
 
     https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
-        outgoingResponse.status(getAllResponse.statusCode).json(getAllResponse);
+        outgoingResponse.status(getAllResponse.statusCode).send(getAllResponse);
     });
 }
