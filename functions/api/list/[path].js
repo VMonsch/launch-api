@@ -1,6 +1,6 @@
 const https = require('https');
 
-export default function handler(incomingRequest, outgoingResponse) {
+export default async function handler(incomingRequest, outgoingResponse) {
     const CS_API_HOST = process.env.CONTENTSTACK_API_HOST;
     const CS_CDN = process.env.CONTENTSTACK_CDN;
     const CS_API_KEY = process.env.CONTENTSTACK_API_KEY;
@@ -14,14 +14,11 @@ export default function handler(incomingRequest, outgoingResponse) {
         }
     }
 
-    console.log("oh hey")
-
     const requestedContentType = incomingRequest.query.path;
     const requestGetAllEntries = `https://${CS_CDN}/content_types/${requestedContentType}/entries?environment=${CS_ENVIRONMENT}`;
 
-    // https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
-    //     outgoingResponse.status(getAllResponse.statusCode).send(getAllResponse);
-    // });
-
-    outgoingResponse.status(200).send(requestedContentType);
+    https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
+        console.log(getAllResponse);
+        outgoingResponse.status(200).send(requestedContentType);
+    });
 }
