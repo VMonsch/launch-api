@@ -28,7 +28,7 @@ export default async function handler(incomingRequest, outgoingResponse) {
 
     getAllResponse.on("end", () => {
       console.log(getAllResponseData);
-      outgoingResponse.status(200).send(getAllResponseData);
+      outgoingResponse.status(200).json(getAllResponseData);
     });
   });
 }
