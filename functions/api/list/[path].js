@@ -17,7 +17,7 @@ export default async function handler(incomingRequest, outgoingResponse) {
     const requestedContentType = incomingRequest.query.path;
     const requestGetAllEntries = `${CS_CDN}/content_types/${requestedContentType}/entries?environment=${CS_ENVIRONMENT}`;
 
-    console.log(requestGetAllEntries);
+    console.log(`Will query ${requestGetAllEntries}`);
 
     https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
         console.log(getAllResponse);
