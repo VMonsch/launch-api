@@ -1,1 +1,1 @@
-Serverless API to be deployed via Contentstack Launch.
+Serverless API to be deployed via Contentstack Launch. 
