@@ -20,15 +20,16 @@ export default async function handler(incomingRequest, outgoingResponse) {
   console.log(`Will query ${requestGetAllEntries}`);
 
   https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
-    let getAllResponseData = "";
+    let getAllResponseString = "";
 
     getAllResponse.on("data", (getAllResponseChunk) => {
-        getAllResponseData += getAllResponseChunk;
+        getAllResponseString += getAllResponseChunk;
     });
 
     getAllResponse.on("end", () => {
-      console.log(getAllResponseData);
-      outgoingResponse.status(200).json(getAllResponseData);
+      const getAllResponseJson = JSON.parse(getAllResponseString);
+      console.log(getAllResponseJson);
+      outgoingResponse.status(200).json(getAllResponseJson);
     });
   });
 }
