@@ -1,0 +1,22 @@
+{
+  "name": "launch-api",
+  "version": "1.0.0",
+  "description": "Serverless API to be deployed via Contentstack Launch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VMonsch/launch-api.git"
+  },
+  "author": "Victor Monsch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VMonsch/launch-api/issues"
+  },
+  "homepage": "https://github.com/VMonsch/launch-api#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}

@@ -1,4 +1,5 @@
-const https = require("https");
+import https from "https";
+import fetch from "node-fetch";
 
 export default async function handler(incomingRequest, outgoingResponse) {
   const CS_API_HOST = process.env.CONTENTSTACK_API_HOST;
@@ -15,21 +16,25 @@ export default async function handler(incomingRequest, outgoingResponse) {
   };
 
   const requestedContentType = incomingRequest.query.path;
-  const requestGetAllEntries = `${CS_CDN}/content_types/${requestedContentType}/entries?environment=${CS_ENVIRONMENT}`;
+  const getAllURL = `${CS_CDN}/content_types/${requestedContentType}/entries?environment=${CS_ENVIRONMENT}`;
 
-  console.log(`Will query ${requestGetAllEntries}`);
+  console.log(`Will query ${getAllURL}`);
 
-  https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
-    let getAllResponseString = "";
+  const getAllResponse = await fetch(getAllURL);
+  const getAllResponseJsin = await getAllResponse.json();
+  outgoingResponse.status(200).json(getAllResponseJsin);
 
-    getAllResponse.on("data", (getAllResponseChunk) => {
-        getAllResponseString += getAllResponseChunk;
-    });
+  //   https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
+  //     let getAllResponseString = "";
 
-    getAllResponse.on("end", () => {
-      const getAllResponseJson = JSON.parse(getAllResponseString);
-      console.log(getAllResponseJson);
-      outgoingResponse.status(200).json(getAllResponseJson);
-    });
-  });
+  //     getAllResponse.on("data", (getAllResponseChunk) => {
+  //         getAllResponseString += getAllResponseChunk;
+  //     });
+
+  //     getAllResponse.on("end", () => {
+  //       const getAllResponseJson = JSON.parse(getAllResponseString);
+  //       console.log(getAllResponseJson);
+  //       outgoingResponse.status(200).json(getAllResponseJson);
+  //     });
+  //   });
 }
