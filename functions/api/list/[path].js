@@ -1,4 +1,3 @@
-import https from "https";
 import fetch from "node-fetch";
 
 export default async function handler(incomingRequest, outgoingResponse) {
@@ -20,21 +19,7 @@ export default async function handler(incomingRequest, outgoingResponse) {
 
   console.log(`Will query ${getAllURL}`);
 
-  const getAllResponse = await fetch(getAllURL);
-  const getAllResponseJsin = await getAllResponse.json();
-  outgoingResponse.status(200).json(getAllResponseJsin);
-
-  //   https.get(requestGetAllEntries, getAllOptions, (getAllResponse) => {
-  //     let getAllResponseString = "";
-
-  //     getAllResponse.on("data", (getAllResponseChunk) => {
-  //         getAllResponseString += getAllResponseChunk;
-  //     });
-
-  //     getAllResponse.on("end", () => {
-  //       const getAllResponseJson = JSON.parse(getAllResponseString);
-  //       console.log(getAllResponseJson);
-  //       outgoingResponse.status(200).json(getAllResponseJson);
-  //     });
-  //   });
+  const getAllResponse = await fetch(getAllURL, getAllOptions);
+  const getAllResponseJson = await getAllResponse.json();
+  outgoingResponse.status(getAllResponse.status).json(getAllResponseJson);
 }
