@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/VMonsch/launch-api#readme",
   "dependencies": {
-    "node-fetch": "^3.3.1"
+    "node-fetch": "2.6.9"
   }
 }
